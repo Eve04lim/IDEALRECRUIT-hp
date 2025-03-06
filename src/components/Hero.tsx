@@ -1,14 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { ArrowRight, Star, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export function Hero() {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-
+  const heroRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     setHasAnimated(true);
 
@@ -17,111 +18,114 @@ export function Hero() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const fadeInClass = hasAnimated ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0';
 
-  const stats = [
-    { number: '1,200+', label: '支援実績' },
-    { number: '99.9%', label: '採用成功率' },
-    { number: '4.9', suffix: '/5.0', label: '顧客満足度' }
-  ];
-
   return (
-    <div className="relative min-h-screen">
-      {/* Background Image */}
+    <div ref={heroRef} className="relative min-h-[90vh] overflow-hidden">
+      {/* 背景 */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/60 to-gray-900/70 z-10" />
+        {/* 背景グラデーション */}
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950 to-gray-900 z-10"></div>
+        
+        {/* 背景画像 */}
         <Image
           src="/images/hero-bg.jpg"
-          alt="Hero background"
+          alt="採用支援"
           fill
           priority
-          className="object-cover"
+          className="object-cover opacity-30 z-0"
           sizes="100vw"
         />
+        
+        {/* グリッドパターン */}
+        <div className="absolute inset-0 opacity-10 z-20" style={{ 
+          backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}></div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-20 container mx-auto px-4 min-h-screen flex flex-col justify-center">
-        <div className="max-w-5xl">
-          {/* Trust Badge */}
-          <div 
-            className={`inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white mb-8 transform transition-all duration-700 ${fadeInClass}`}
-          >
-            <Star className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-sm font-medium">採用成功率99.9%のプロフェッショナル</span>
-          </div>
-
-          {/* Main Heading */}
-          <h1 
-            className={`text-5xl md:text-6xl lg:text-7xl font-bold mb-8 transform transition-all duration-700 delay-100 ${fadeInClass}`}
-          >
-            <span className="text-white">
-              理想の採用を、
-              <br />
-              <span className="relative inline-block mt-2">
-                共に実現する
-                <div className="absolute -bottom-4 left-0 w-full h-1 bg-blue-500/50 rounded-full"></div>
-              </span>
-            </span>
+      {/* メインコンテンツ */}
+      <div className="relative z-30 container mx-auto px-4 min-h-[90vh] flex flex-col justify-center">
+        <div className="max-w-4xl">
+          {/* メインヘッディング */}
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 transform transition-all duration-700 delay-100 ${fadeInClass}`}>
+            採用業務を<span className="text-blue-400">プロに任せて</span><br />
+            <span className="text-blue-400">理想の人材</span>を獲得する
           </h1>
-
-          {/* Description */}
-          <p 
-            className={`text-xl md:text-2xl text-white/90 mb-12 max-w-3xl transform transition-all duration-700 delay-200 ${fadeInClass}`}
-          >
-            戦略的な採用計画から、選考プロセスの最適化まで。
-            <br />
-            貴社の成長を加速させる採用支援サービスをご提供します。
+          
+          {/* サブヘッディング */}
+          <p className={`text-xl text-white/80 mb-10 max-w-2xl transform transition-all duration-700 delay-200 ${fadeInClass}`}>
+            戦略立案から候補者の発掘、面接調整、内定まで。<br />
+            採用のプロが貴社の採用活動を成功に導きます。
           </p>
 
-          {/* CTA Buttons */}
-          <div 
-            className={`flex flex-col sm:flex-row gap-4 mb-16 transform transition-all duration-700 delay-300 ${fadeInClass}`}
-          >
+          {/* 特徴ポイント */}
+          <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 transform transition-all duration-700 delay-300 ${fadeInClass}`}>
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-lg p-5">
+              <div className="text-xl font-semibold text-white mb-1">採用コスト削減</div>
+              <p className="text-white/70 text-sm">採用単価の削減と採用期間の短縮を実現</p>
+            </div>
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-lg p-5">
+              <div className="text-xl font-semibold text-white mb-1">業務負担軽減</div>
+              <p className="text-white/70 text-sm">煩雑な採用業務をプロが効率的に代行</p>
+            </div>
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-lg p-5">
+              <div className="text-xl font-semibold text-white mb-1">採用成功率向上</div>
+              <p className="text-white/70 text-sm">的確な人材要件定義と選考プロセス設計</p>
+            </div>
+          </div>
+
+          {/* CTA ボタン */}
+          <div className={`flex flex-col sm:flex-row gap-4 mb-16 transform transition-all duration-700 delay-400 ${fadeInClass}`}>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 group"
             >
               無料相談を予約する
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/cases"
-              className="inline-flex items-center px-8 py-4 border border-white text-white rounded-md hover:bg-white/10 transition-colors"
+              href="/services"
+              className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/10 text-white rounded-md hover:bg-white/20 transition-colors"
             >
-              導入事例を見る
+              サービス詳細を見る
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl transform transition-all duration-700 delay-400 ${fadeInClass}`}>
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="bg-black/20 backdrop-blur-sm rounded-lg p-6 transition-transform duration-300 hover:-translate-y-1"
-              >
-                <div className="text-3xl font-bold text-white mb-1">
-                  {stat.number}
-                  <span className="text-blue-300">{stat.suffix}</span>
-                </div>
-                <div className="text-white/80">{stat.label}</div>
+          {/* 実績 */}
+          <div className={`transform transition-all duration-700 delay-500 ${fadeInClass}`}>
+            <div className="flex flex-wrap gap-6 items-center justify-start">
+              <div className="flex items-center bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10">
+                <div className="text-2xl font-bold text-white mr-2">1,200<span className="text-blue-400">+</span></div>
+                <div className="text-white/70 text-sm">支援実績</div>
               </div>
-            ))}
+              <div className="flex items-center bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10">
+                <div className="text-2xl font-bold text-white mr-2">99.9<span className="text-blue-400">%</span></div>
+                <div className="text-white/70 text-sm">採用成功率</div>
+              </div>
+              <div className="flex items-center bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10">
+                <div className="text-2xl font-bold text-white mr-2">4.9<span className="text-blue-400">/5.0</span></div>
+                <div className="text-white/70 text-sm">顧客満足度</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* スクロールインジケーター */}
       <div 
-        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white flex flex-col items-center transition-all duration-700 delay-500 ${fadeInClass}`}
+        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-all duration-300 ${fadeInClass}`}
         style={{ opacity: Math.max(1 - scrollPosition / 200, 0) }}
       >
-        <span className="text-sm font-medium mb-2">Scroll</span>
-        <ArrowDown className="w-5 h-5 animate-bounce" />
+        <span className="text-white/70 text-sm mb-1">詳細を見る</span>
+        <div className="w-px h-8 bg-white/20 animate-pulse"></div>
       </div>
     </div>
   );
