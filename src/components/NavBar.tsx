@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Building, ChevronDown, Home, Info, Mail, Menu, Phone, X } from 'lucide-react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Phone, Home, Building, Info, Mail } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 // 型定義
 interface ChildItem {
@@ -52,14 +52,40 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const [isNavVisible, setIsNavVisible] = useState(true);
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      const isUp = currentScrollY < lastScrollY;
+      
+      // Update scroll direction state
+      setIsScrollingUp(isUp);
+      
+      // Hide/show navbar based on scroll direction
+      if (currentScrollY > 100) {
+        setIsNavVisible(isUp);
+      } else {
+        setIsNavVisible(true);
+      }
+      
+      // Check if we've scrolled enough to change navbar style
+      setIsScrolled(currentScrollY > 20);
+      
+      // Store scroll position for animation effects
+      setScrollPosition(currentScrollY);
+      
+      // Update the last scroll position
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -75,6 +101,20 @@ export default function NavBar() {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+  
+  // ドロップダウンメニュー以外をクリックしたときにドロップダウンを閉じる
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // 現在のパスがアクティブかどうかチェック
   const isActive = (href: string) => {
@@ -85,13 +125,29 @@ export default function NavBar() {
     setActiveDropdown(activeDropdown === label ? null : label);
   };
 
+  // Calculate navbar opacity based on scroll position
+  const navbarOpacity = Math.min(0.9, 0.5 + scrollPosition / 300);
+
   return (
-    <nav className={`w-full transition-all duration-300 ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}>
+    <nav 
+      className={`w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'py-2 fixed' : 'py-4'
+      } ${isScrolled && !isNavVisible ? '-translate-y-full' : 'translate-y-0'}`}
+      style={{
+        backgroundColor: isScrolled ? `rgba(255, 255, 255, ${navbarOpacity})` : 'transparent',
+        backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+        boxShadow: isScrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 relative z-20">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className={`text-2xl font-bold transition-colors duration-300 ${
+              isScrolled 
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent' 
+                : 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent'
+            }`}>
               IDEALRECRUIT
             </span>
           </Link>
@@ -99,12 +155,14 @@ export default function NavBar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navigationItems.map((item) => (
-              <div key={item.label} className="relative group">
+              <div key={item.label} className="relative group" ref={item.children ? dropdownRef : undefined}>
                 {item.children ? (
                   <button
                     onClick={() => handleDropdownToggle(item.label)}
-                    className={`flex items-center px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors rounded-md group ${
-                      activeDropdown === item.label ? 'text-blue-600' : ''
+                    className={`flex items-center px-4 py-2 transition-colors rounded-md group ${
+                      activeDropdown === item.label 
+                        ? 'text-blue-600' 
+                        : 'text-gray-700 hover:text-blue-600'
                     }`}
                   >
                     {item.icon && <span className="mr-1.5">{item.icon}</span>}
@@ -119,8 +177,10 @@ export default function NavBar() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`flex items-center px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors rounded-md relative group ${
-                      isActive(item.href) ? 'text-blue-600' : ''
+                    className={`flex items-center px-4 py-2 transition-colors rounded-md relative group ${
+                      isActive(item.href) 
+                        ? 'text-blue-600'
+                        : 'text-gray-700 hover:text-blue-600'
                     }`}
                   >
                     {item.icon && <span className="mr-1.5">{item.icon}</span>}
