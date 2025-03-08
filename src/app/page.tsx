@@ -1,22 +1,20 @@
 // src/app/page.tsx
 
-import { Hero } from '@/components/Hero';
-import { MessageSection } from '@/components/MessageSection';
-import { VisionSection } from '@/components/VisionSection';
-import { ServiceSection } from '@/components/ServiceSection';
-import { FlowSection } from '@/components/FlowSection';
-import { CasesSection } from '@/components/CasesSection';
 import { AboutSection } from '@/components/AboutSection';
-import { FAQSection } from '@/components/FAQSection';
-import { NewsSection } from '@/components/NewsSection';
 import { AchievementSection } from '@/components/AchievementSection';
+import { CasesSection } from '@/components/CasesSection';
 import { ContactSection } from '@/components/ContactSection';
+import { FAQSection } from '@/components/FAQSection';
+import { FlowSection } from '@/components/FlowSection';
+import { Hero } from '@/components/Hero';
+import { NewsSection } from '@/components/NewsSection';
+import { ServiceSection } from '@/components/ServiceSection';
+import { VisionSection } from '@/components/VisionSection';
 
 export default function HomePage() {
   return (
     <main>
       <Hero />
-      <MessageSection />
       <VisionSection />
       <ServiceSection />
       <AchievementSection />
