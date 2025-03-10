@@ -37,18 +37,18 @@ export function AchievementSection() {
   }, []);
 
   const achievements = [
-    { number: '1,200+', label: '支援実績', icon: Users, color: 'bg-blue-600' },
-    { number: '99.9%', label: '採用成功率', icon: Star, color: 'bg-indigo-600' },
-    { number: '40%', label: '採用コスト削減率', icon: TrendingUp, color: 'bg-cyan-600' },
-    { number: '4.9/5.0', label: '顧客満足度', icon: BarChart, color: 'bg-sky-600' }
+    { number: '1,200+', label: '支援実績', icon: Users, color: 'from-blue-500 to-blue-600' },
+    { number: '99.9%', label: '採用成功率', icon: Star, color: 'from-indigo-500 to-indigo-600' },
+    { number: '40%', label: '採用コスト削減率', icon: TrendingUp, color: 'from-cyan-500 to-cyan-600' },
+    { number: '4.9/5.0', label: '顧客満足度', icon: BarChart, color: 'from-sky-500 to-sky-600' }
   ];
 
   const industries = [
-    { name: 'IT・通信', percentage: 35, color: 'bg-blue-600' },
-    { name: '製造業', percentage: 25, color: 'bg-indigo-600' },
-    { name: 'サービス業', percentage: 20, color: 'bg-cyan-600' },
-    { name: '小売・流通', percentage: 15, color: 'bg-sky-600' },
-    { name: 'その他', percentage: 5, color: 'bg-gray-500' }
+    { name: 'IT・通信', percentage: 35, color: 'from-blue-500 to-blue-600' },
+    { name: '製造業', percentage: 25, color: 'from-indigo-500 to-indigo-600' },
+    { name: 'サービス業', percentage: 20, color: 'from-cyan-500 to-cyan-600' },
+    { name: '小売・流通', percentage: 15, color: 'from-sky-500 to-sky-600' },
+    { name: 'その他', percentage: 5, color: 'from-gray-400 to-gray-500' }
   ];
 
   return (
@@ -90,22 +90,15 @@ export function AchievementSection() {
       <div className="container relative mx-auto px-4">
         {/* セクションヘッダー */}
         <div className="max-w-3xl mx-auto text-center mb-20">
-          <div 
-            className={`inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-white mb-6 transform transition-all duration-700 ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-            }`}
-          >
-            <span className="text-sm font-medium">実績</span>
-          </div>
           <h2 
-            className={`text-4xl font-bold mb-6 transform transition-all duration-700 delay-100 ${
+            className={`text-4xl font-bold mb-6 transform transition-all duration-700 ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
           >
-            <span className="text-blue-600">圧倒的な実績</span>が証明する品質
+            採用支援<span className="text-blue-600">実績</span>
           </h2>
           <p 
-            className={`text-xl text-gray-600 transform transition-all duration-700 delay-200 ${
+            className={`text-xl text-gray-600 transform transition-all duration-700 delay-100 ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
           >
@@ -116,60 +109,66 @@ export function AchievementSection() {
         </div>
 
         {/* 実績数値 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-20">
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className={`text-center transform transition-all duration-700 ${
+              className={`bg-white rounded-xl border border-gray-100 shadow-lg p-6 transform transition-all duration-700 hover:-translate-y-1 hover:shadow-xl ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className={`inline-flex items-center justify-center w-16 h-16 ${achievement.color} rounded-2xl mb-4 text-white shadow-lg`}>
-                <achievement.icon className="w-8 h-8" />
+              <div className={`flex items-center mb-4`}>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${achievement.color} flex items-center justify-center text-white`}>
+                  <achievement.icon className="w-6 h-6" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 ml-3">
+                  {achievement.number}
+                </div>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">
-                {achievement.number}
-              </div>
-              <div className="text-gray-600">{achievement.label}</div>
+              <div className="text-gray-600 font-medium">{achievement.label}</div>
             </div>
           ))}
         </div>
 
         {/* 業界別実績 */}
         <div 
-          className={`max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl shadow-blue-900/5 border border-gray-100 transform transition-all duration-700 delay-400 ${
+          className={`max-w-3xl mx-auto transform transition-all duration-700 delay-400 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <h3 className="text-2xl font-bold text-center mb-8">業界別支援実績</h3>
-          <div className="space-y-6">
-            {industries.map((industry, index) => (
-              <div
-                key={index}
-                className={`transform transition-all duration-700 ${
-                  isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                }`}
-                style={{ transitionDelay: `${(index + 4) * 100}ms` }}
-              >
-                <div className="flex justify-between items-center mb-2">
-                  <div className="flex items-center">
-                    <div className={`w-3 h-3 rounded-full ${industry.color} mr-2`}></div>
-                    <span className="text-gray-900 font-medium">{industry.name}</span>
+          <div className="bg-white p-8 rounded-xl shadow-xl shadow-blue-900/5 border border-gray-100">
+            <h3 className="text-2xl font-bold mb-8 flex items-center">
+              <span className="w-1.5 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full mr-3"></span>
+              業界別支援実績
+            </h3>
+            <div className="space-y-8">
+              {industries.map((industry, index) => (
+                <div
+                  key={index}
+                  className={`transform transition-all duration-700 ${
+                    isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                  }`}
+                  style={{ transitionDelay: `${(index + 4) * 100}ms` }}
+                >
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="flex items-center">
+                      <span className="text-gray-900 font-medium">{industry.name}</span>
+                    </div>
+                    <span className="text-gray-900 font-bold">{industry.percentage}%</span>
                   </div>
-                  <span className="text-gray-600 font-semibold">{industry.percentage}%</span>
+                  <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${industry.color} rounded-full transition-all duration-1500 ease-out`}
+                      style={{ 
+                        width: isVisible ? `${industry.percentage}%` : '0%',
+                        transitionDelay: `${(index + 8) * 100}ms`
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className={`h-full ${industry.color} rounded-full transition-all duration-1500 ease-out`}
-                    style={{ 
-                      width: isVisible ? `${industry.percentage}%` : '0%',
-                      transitionDelay: `${(index + 8) * 100}ms`
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -181,7 +180,7 @@ export function AchievementSection() {
         >
           <Link
             href="/cases"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+            className="inline-flex items-center px-8 py-4 bg-white border border-gray-200 text-gray-900 font-medium rounded-lg hover:bg-blue-600 hover:text-white hover:border-transparent hover:shadow-lg transition-all duration-300 group"
           >
             導入事例を見る
             <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
