@@ -82,12 +82,11 @@ export default function RPOPage() {
     "上位表示対策"
   ];
 
-  // ref設定用のヘルパー関数
+  // ref設定用のヘルパー関数を修正
   const setRef = (id: string) => (el: HTMLElement | null) => {
     if (el) {
       sectionRefs.current[id] = el;
     }
-    return null;
   };
 
   return (
@@ -105,21 +104,23 @@ export default function RPOPage() {
         </div>
       </div>
 
-      {/* ヒーローセクション */}
+      {/* ヒーローセクション - よりモダンなデザインに */}
       <section 
         id="hero-section"
         ref={setRef('hero')}
-        className="relative py-32 bg-gradient-to-br from-indigo-800 to-blue-900 text-white overflow-hidden"
+        className="relative py-36 bg-gradient-to-br from-indigo-800 to-blue-900 text-white overflow-hidden"
       >
-        {/* 背景装飾 */}
+        {/* 背景装飾 - より豊かな視覚表現 */}
         <div className="absolute inset-0 overflow-hidden">
           {/* パターン背景 */}
           <div className="absolute inset-0 bg-blue-900 opacity-30" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}></div>
           
-          {/* 光の効果 */}
+          {/* 光の効果 - より豊かな背景表現 */}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400/10 to-transparent"></div>
+          <div className="absolute top-1/3 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-xl"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-indigo-400/10 rounded-full blur-xl"></div>
         </div>
         
         <div className="container relative z-10 mx-auto px-4">
@@ -128,7 +129,7 @@ export default function RPOPage() {
               isIntersecting['hero-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
               <Users className="w-5 h-5 mr-2" />
-              <span>Recruit Process Outsourcing</span>
+              <span className="tracking-wide">Recruit Process Outsourcing</span>
             </div>
             
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 transform transition-all duration-1000 delay-100 ${
@@ -136,7 +137,7 @@ export default function RPOPage() {
             }`}>
               採用業務を
               <br />
-              フルカスタマイズで代行
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-indigo-100">フルカスタマイズで代行</span>
             </h1>
             
             <p className={`text-xl text-blue-100 mb-12 transform transition-all duration-1000 delay-200 ${
@@ -152,14 +153,14 @@ export default function RPOPage() {
             }`}>
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-md hover:bg-blue-50 transition-colors group shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
               >
                 無料相談を予約する
                 <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
               <a
                 href="#intro-section"
-                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-md hover:bg-white/10 transition-colors"
+                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-lg hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
               >
                 詳細を見る
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -169,42 +170,45 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* イントロダクションセクション */}
+      {/* イントロダクションセクション - より洗練されたデザイン */}
       <section 
         id="intro-section"
         ref={setRef('intro')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* テキスト */}
+              {/* テキスト - より読みやすく魅力的に */}
               <div className={`transform transition-all duration-1000 ${
                 isIntersecting['intro-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
                 <div className="prose prose-lg max-w-none text-gray-600">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6">採用のプロが貴社の採用活動を代行</h2>
-                  <p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6 relative inline-block">
+                    採用のプロが貴社の採用活動を代行
+                    <div className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
+                  </h2>
+                  <p className="leading-relaxed">
                     これまで、数多くの企業に対し、採用支援を実施した採用のプロが御社の採用プロセスを代行します。
                     採用代行サービスでは、御社に必要な項目だけを適正価格で実施します。
                   </p>
-                  <p>
+                  <p className="leading-relaxed">
                     「応募は来るんだけど、面接は苦手」「媒体のスカウトの設定だけしたい」など、御社の悩みをお聞かせください。
                   </p>
                   
-                  <blockquote className="bg-blue-50 p-4 rounded-lg">
-                    <p className="text-blue-700">
+                  <blockquote className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-400 shadow-sm not-italic">
+                    <p className="text-blue-700 font-medium">
                       採用業務に時間を取られず、本来の業務に集中しませんか？必要な部分だけを任せることができます。
                     </p>
                   </blockquote>
                 </div>
               </div>
               
-              {/* イメージ */}
+              {/* イメージ - より洗練された表示 */}
               <div className={`relative transform transition-all duration-1000 delay-300 ${
                 isIntersecting['intro-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5">
                   <Image
                     src="/api/placeholder/600/400"
                     alt="採用代行サービス"
@@ -212,13 +216,13 @@ export default function RPOPage() {
                     height={400}
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
                 </div>
                 
-                {/* 統計データ */}
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 transform hover:-translate-y-1 transition-transform duration-300">
-                  <div className="text-3xl font-bold text-blue-600 mb-1">60%</div>
-                  <div className="text-gray-600 text-sm">採用業務工数削減</div>
+                {/* 統計データ - より洗練されたカード */}
+                <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 transform hover:-translate-y-1 transition-transform duration-300 ring-1 ring-black/5">
+                  <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-1">60%</div>
+                  <div className="text-gray-600 text-sm font-medium">採用業務工数削減</div>
                 </div>
               </div>
             </div>
@@ -226,18 +230,18 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* 特徴セクション */}
+      {/* 特徴セクション - より洗練されたカードデザイン */}
       <section 
         id="features-section"
         ref={setRef('features')}
-        className="py-24 bg-gray-50"
+        className="py-28 bg-gray-50"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${
               isIntersecting['features-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
-              <p className="text-blue-600 font-medium mb-2">Our Services</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Services</p>
               <h2 className="text-3xl font-bold mb-4">採用代行サービス内容</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 以下のサービス内容から、貴社のニーズに合わせて必要なものだけを選択いただけます。
@@ -248,14 +252,14 @@ export default function RPOPage() {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`relative bg-white p-8 rounded-xl shadow-lg transform transition-all duration-700 hover:shadow-xl hover:-translate-y-1 ${
+                  className={`relative bg-white p-8 rounded-xl shadow-lg transform transition-all duration-700 hover:shadow-xl hover:-translate-y-1 border border-gray-100 ${
                     isIntersecting['features-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="absolute top-0 left-0 w-2 h-full bg-blue-600 rounded-l-xl"></div>
+                  <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-600 to-indigo-600 rounded-l-xl"></div>
                   <div className="flex items-start">
-                    <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mr-6 flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center mr-6 flex-shrink-0 shadow-sm">
                       {feature.icon}
                     </div>
                     <div>
@@ -273,7 +277,7 @@ export default function RPOPage() {
               <p className="text-gray-600 mb-6">他にも採用業務のパーツごとにカスタマイズが可能です</p>
               <a
                 href="#wantedly-section"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors group"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:bg-gradient-to-r hover:from-blue-700 hover:to-blue-600 hover:-translate-y-1 transition-all duration-300 group shadow-md"
               >
                 Wantedly運用代行を見る
                 <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
@@ -283,22 +287,23 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* メリットセクション */}
+      {/* メリットセクション - より洗練されたカードデザイン */}
       <section 
         id="benefits-section"
         ref={setRef('benefits')}
-        className="py-24 bg-white relative overflow-hidden"
+        className="py-28 bg-white relative overflow-hidden"
       >
-        {/* 装飾 */}
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full opacity-80 blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-50 rounded-full opacity-80 blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        {/* 装飾 - より豊かな背景 */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-50 rounded-full opacity-80 blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-50 rounded-full opacity-80 blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-teal-50 rounded-full opacity-80 blur-xl"></div>
         
         <div className="container relative z-10 mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${
               isIntersecting['benefits-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
-              <p className="text-blue-600 font-medium mb-2">Our Benefits</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Benefits</p>
               <h2 className="text-3xl font-bold mb-4">導入メリット</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 採用代行サービスの導入により、以下のメリットが得られます。
@@ -309,16 +314,16 @@ export default function RPOPage() {
               {benefits.map((benefit, index) => (
                 <div 
                   key={index} 
-                  className={`bg-blue-50 rounded-xl p-6 transform transition-all duration-700 hover:shadow-lg hover:-translate-y-1 ${
+                  className={`bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 transform transition-all duration-700 hover:shadow-lg hover:-translate-y-1 border border-blue-100/20 ${
                     isIntersecting['benefits-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4 shadow-sm">
                     <Check className="w-6 h-6 text-blue-600" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{benefit}</h3>
-                  <div className="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                  <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mb-4"></div>
                   <p className="text-gray-600">
                     {index === 0 && "採用業務にかかる時間を大幅に削減し、本業に集中できます。"}
                     {index === 1 && "効率的な採用活動により、採用コストを最適化できます。"}
@@ -332,33 +337,36 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* Wantedly運用代行セクション */}
+      {/* Wantedly運用代行セクション - より洗練されたデザイン */}
       <section 
         id="wantedly-section"
         ref={setRef('wantedly')}
-        className="py-24 bg-gray-900 text-white"
+        className="py-28 bg-gradient-to-br from-gray-900 to-blue-900 text-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* 左側: コンテンツ */}
+              {/* 左側: コンテンツ - より魅力的なレイアウト */}
               <div className={`transform transition-all duration-1000 ${
                 isIntersecting['wantedly-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <p className="text-blue-300 font-medium mb-2">Wantedly Expert</p>
-                <h2 className="text-3xl font-bold mb-6">Wantedly運用代行</h2>
-                <p className="text-lg text-blue-100 mb-6">
+                <p className="text-blue-300 font-medium mb-2 tracking-wide">Wantedly Expert</p>
+                <h2 className="text-3xl font-bold mb-6 relative inline-block">
+                  Wantedly運用代行
+                  <div className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full"></div>
+                </h2>
+                <p className="text-lg text-blue-100 mb-6 leading-relaxed">
                   弊社は数少ない、Wantedlyを代理店として扱っている企業です。
                   これまで、八百屋さん、工場、人材会社、外資系スタートアップコンサル会社など100社以上の会社様のWantedly運用の支援を実施しました。
                 </p>
                 
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-2 gap-6 mb-8">
                   {wantedlyServices.map((service, index) => (
                     <div 
                       key={index}
                       className="flex items-center"
                     >
-                      <div className="w-10 h-10 rounded-full bg-blue-700/50 flex items-center justify-center mr-4">
+                      <div className="w-10 h-10 rounded-full bg-blue-700/50 backdrop-blur-sm flex items-center justify-center mr-4 shadow-md">
                         <Check className="w-5 h-5 text-blue-300" />
                       </div>
                       <span className="text-lg font-medium">{service}</span>
@@ -366,18 +374,18 @@ export default function RPOPage() {
                   ))}
                 </div>
                 
-                <div className="p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                <div className="p-6 bg-white/10 rounded-xl backdrop-blur-sm border border-white/10 shadow-lg">
                   <p className="text-blue-100">
                     そのノウハウを持って、幅広く運用を代行致します。専門性の高いWantedly運用のことならお任せください。
                   </p>
                 </div>
               </div>
               
-              {/* 右側: 画像 */}
+              {/* 右側: 画像 - より洗練された表示 */}
               <div className={`transform transition-all duration-1000 delay-300 ${
                 isIntersecting['wantedly-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                   <Image
                     src="/api/placeholder/600/400"
                     alt="Wantedly運用代行"
@@ -385,16 +393,16 @@ export default function RPOPage() {
                     height={400}
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent"></div>
                   
-                  {/* オーバーレイコンテンツ */}
+                  {/* オーバーレイコンテンツ - より洗練されたカード */}
                   <div className="absolute inset-0 flex flex-col justify-end p-8">
-                    <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl">
+                    <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg">
                       <div className="flex items-center mb-4">
                         <Users className="w-6 h-6 text-blue-300 mr-3" />
                         <h3 className="text-xl font-bold">採用成功実績</h3>
                       </div>
-                      <div className="text-4xl font-bold mb-2">100社+</div>
+                      <div className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-indigo-100">100社+</div>
                       <p className="text-blue-100">さまざまな業界のWantedly運用を支援</p>
                     </div>
                   </div>
@@ -405,18 +413,18 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* プロセスセクション */}
+      {/* プロセスセクション - タイムラインを改善 */}
       <section 
         id="process-section"
         ref={setRef('process')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${
               isIntersecting['process-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
-              <p className="text-blue-600 font-medium mb-2">Our Process</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Process</p>
               <h2 className="text-3xl font-bold mb-4">サービス導入の流れ</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 採用代行サービスの導入から運用までの流れをご紹介します。
@@ -424,8 +432,8 @@ export default function RPOPage() {
             </div>
             
             <div className="relative">
-              {/* 中央線 */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-blue-200 transform -translate-x-1/2"></div>
+              {/* 中央線 - よりモダンなデザイン */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-200 to-indigo-200 transform -translate-x-1/2"></div>
               
               <div className="space-y-20">
                 {[
@@ -463,13 +471,13 @@ export default function RPOPage() {
                     </div>
                     
                     <div className="relative z-10 flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-blue-100 border-4 border-white shadow-lg flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 border-4 border-white shadow-lg flex items-center justify-center">
                         {step.icon}
                       </div>
                     </div>
                     
                     <div className={`w-1/2 ${index % 2 === 0 ? 'order-last pl-12' : 'pr-12 text-right'}`}>
-                      <div className="text-5xl font-bold text-blue-100">0{index + 1}</div>
+                      <div className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-indigo-100">0{index + 1}</div>
                     </div>
                   </div>
                 ))}
@@ -479,20 +487,26 @@ export default function RPOPage() {
         </div>
       </section>
 
-      {/* CTA セクション */}
+      {/* CTA セクション - より魅力的なデザイン */}
       <section 
         id="cta-section"
         ref={setRef('cta')}
-        className="py-24 bg-gradient-to-r from-blue-800 to-indigo-800 text-white"
+        className="py-28 bg-gradient-to-r from-blue-800 to-indigo-800 text-white relative overflow-hidden"
       >
-        <div className="container mx-auto px-4">
+        {/* 背景装飾 - より豊かな背景 */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
+        
+        <div className="container relative z-10 mx-auto px-4">
           <div className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
             isIntersecting['cta-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               採用業務を専門家に任せて
               <br />
-              本業に集中しませんか？
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-indigo-100">本業に集中しませんか？</span>
             </h2>
             <p className="text-xl text-blue-100 mb-12">
               貴社の採用課題に合わせたカスタマイズプランをご提案します。
@@ -501,7 +515,7 @@ export default function RPOPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-md hover:bg-blue-50 transition-colors group shadow-lg"
+              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
             >
               ご相談はこちら
               <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />

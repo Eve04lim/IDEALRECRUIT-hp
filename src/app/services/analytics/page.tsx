@@ -150,12 +150,11 @@ export default function AnalyticsPage() {
     }
   ];
 
-  // ref設定用のヘルパー関数
+  // ref設定用のヘルパー関数を修正
   const setRef = (id: string) => (el: HTMLElement | null) => {
     if (el) {
       sectionRefs.current[id] = el;
     }
-    return null;
   };
 
   return (
@@ -163,7 +162,7 @@ export default function AnalyticsPage() {
       {/* スクロール進行バー */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
         <div 
-          className="h-full bg-blue-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-300"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -181,45 +180,46 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      {/* ヒーローセクション */}
+      {/* ヒーローセクション - より洗練されたデザインに */}
       <section 
         id="hero-section"
         ref={setRef('hero')}
-        className="relative py-32 overflow-hidden"
+        className="relative py-36 overflow-hidden"
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 to-white"></div>
         
-        {/* 装飾的な背景要素 */}
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-100 rounded-full opacity-50 blur-3xl -translate-y-1/4 translate-x-1/4"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-100 rounded-full opacity-40 blur-3xl translate-y-1/4 -translate-x-1/4"></div>
+        {/* 装飾的な背景要素 - より現代的な雰囲気に */}
+        <div className="absolute top-0 right-0 w-2/3 h-2/3 bg-blue-100 rounded-full opacity-50 blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-100 rounded-full opacity-40 blur-3xl translate-y-1/4 -translate-x-1/4"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-teal-100 rounded-full opacity-30 blur-xl"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* コンテンツ */}
+              {/* コンテンツ - より強調されたテキスト */}
               <div className={`transform transition-all duration-1000 ${isIntersecting['hero-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <div className="flex items-center text-blue-600 mb-6">
                   <BarChart className="w-6 h-6 mr-2" />
-                  <span className="text-lg font-medium">Data Analytics</span>
+                  <span className="text-lg font-medium tracking-wide">Data Analytics</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl font-bold mb-8">
+                <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
                   社内優秀層から逆算した
                   <br />
-                  <span className="relative inline-block mt-2">
+                  <span className="relative inline-block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
                     理想の採用を実現
-                    <div className="absolute -bottom-3 left-0 w-full h-1 bg-blue-500/50"></div>
+                    <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
                   </span>
                 </h1>
 
-                <p className="text-xl text-gray-600 mb-12 max-w-xl">
+                <p className="text-xl text-gray-600 mb-12 max-w-xl leading-relaxed">
                   「仕事にあった人を起用する。」弊社の採用分析事業では、社内で評価が高く活躍している理想的な社員の採用をサポートします。
                 </p>
 
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors group shadow-lg"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:translate-y-[-2px] transition-all duration-300 group shadow-lg hover:shadow-blue-200"
                   >
                     無料相談を予約する
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -228,7 +228,7 @@ export default function AnalyticsPage() {
                     onClick={() => {
                       document.getElementById('benefits')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="inline-flex items-center px-8 py-4 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+                    className="inline-flex items-center px-8 py-4 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300"
                   >
                     詳しく見る
                     <ChevronDown className="w-5 h-5 ml-2" />
@@ -236,9 +236,9 @@ export default function AnalyticsPage() {
                 </div>
               </div>
 
-              {/* ヒーロー画像 */}
+              {/* ヒーロー画像 - よりモダンな表示 */}
               <div className={`relative transform transition-all duration-1000 delay-300 ${isIntersecting['hero-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5">
                   <Image
                     src="/api/placeholder/800/800"
                     alt="Data Analytics"
@@ -249,10 +249,10 @@ export default function AnalyticsPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                 </div>
                 
-                {/* フローティング統計 */}
-                <div className="absolute -right-8 -bottom-8 bg-white rounded-xl shadow-xl p-6 transform hover:-translate-y-1 transition-transform duration-300">
-                  <div className="text-3xl font-bold text-blue-600 mb-1">99.9%</div>
-                  <div className="text-gray-600 text-sm">採用成功率</div>
+                {/* フローティング統計 - より洗練されたカード */}
+                <div className="absolute -right-8 -bottom-8 bg-white rounded-xl shadow-xl p-6 transform hover:-translate-y-1 transition-transform duration-300 ring-1 ring-black/5">
+                  <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-1">99.9%</div>
+                  <div className="text-gray-600 text-sm font-medium">採用成功率</div>
                 </div>
               </div>
             </div>
@@ -260,16 +260,16 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
-      {/* メリットセクション */}
+      {/* メリットセクション - カードデザインを改善 */}
       <section 
         id="benefits"
         ref={setRef('benefits')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${isIntersecting['benefits'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <p className="text-blue-600 font-medium mb-2">Why Choose Us</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Why Choose Us</p>
               <h2 className="text-3xl font-bold mb-4">採用分析によるメリット</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 データに基づいた採用戦略により、採用効率の向上と最適な人材の獲得を実現します。
@@ -280,16 +280,16 @@ export default function AnalyticsPage() {
               {benefits.map((benefit, index) => (
                 <div 
                   key={index}
-                  className={`group bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-500 hover:-translate-y-2 ${isIntersecting['benefits'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  className={`group bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-500 hover:-translate-y-2 border border-gray-100 ${isIntersecting['benefits'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     {benefit.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-gray-900">{benefit.title}</h3>
                   <p className="text-gray-600 mb-6">{benefit.description}</p>
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold text-blue-600">{benefit.metrics.value}</span>
+                    <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">{benefit.metrics.value}</span>
                     <span className="text-gray-500 ml-2">{benefit.metrics.label}</span>
                   </div>
                 </div>
@@ -299,16 +299,16 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
-      {/* プロセスセクション */}
+      {/* プロセスセクション - タイムラインを改善 */}
       <section 
         id="process"
         ref={setRef('process')}
-        className="py-24 bg-gray-50"
+        className="py-28 bg-gray-50"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${isIntersecting['process'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <p className="text-blue-600 font-medium mb-2">Our Process</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Process</p>
               <h2 className="text-3xl font-bold mb-4">採用までの流れ</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 データ分析から採用成功まで、一貫したプロセスで貴社の採用をサポートします。
@@ -316,7 +316,7 @@ export default function AnalyticsPage() {
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* プロセスステップ */}
+              {/* プロセスステップ - ビジュアルを強化 */}
               <div className="space-y-12">
                 {process.map((step, index) => (
                   <div 
@@ -326,21 +326,23 @@ export default function AnalyticsPage() {
                   >
                     <div className="flex">
                       <div className="flex-shrink-0 mr-6">
-                        <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold shadow-md">
                           {index + 1}
                         </div>
                         {index < process.length - 1 && (
-                          <div className="w-px h-full bg-blue-200 mx-auto mt-4"></div>
+                          <div className="w-px h-full bg-gradient-to-b from-blue-400 to-indigo-400 mx-auto mt-4"></div>
                         )}
                       </div>
                       <div className="flex-grow">
-                        <div className="bg-white rounded-xl p-6 shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:translate-x-2">
+                        <div className="bg-white rounded-xl p-6 shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:translate-x-2 border border-gray-100">
                           <h3 className="text-xl font-bold mb-3">{step.title}</h3>
                           <p className="text-gray-600 mb-4">{step.description}</p>
                           <div className="space-y-2">
                             {step.details.map((detail, i) => (
                               <div key={i} className="flex items-start">
-                                <Check className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                                <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                                  <Check className="w-3 h-3 text-blue-600" />
+                                </div>
                                 <span className="text-gray-600">{detail}</span>
                               </div>
                             ))}
@@ -352,10 +354,10 @@ export default function AnalyticsPage() {
                 ))}
               </div>
 
-              {/* プロセス画像 */}
+              {/* プロセス画像 - より洗練された表示 */}
               <div className={`relative hidden lg:block transform transition-all duration-1000 ${isIntersecting['process'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <div className="sticky top-20">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5">
                     <Image
                       src="/api/placeholder/600/450"
                       alt="Recruitment Process"
@@ -365,15 +367,15 @@ export default function AnalyticsPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent"></div>
                     
-                    {/* フローティングデータポイント */}
-                    <div className="absolute top-1/4 left-1/4 bg-white rounded-lg shadow-lg p-4 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="text-2xl font-bold text-blue-600">40%</div>
-                      <div className="text-gray-600 text-xs">コスト削減</div>
+                    {/* フローティングデータポイント - より洗練されたカード */}
+                    <div className="absolute top-1/4 left-1/4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 transform -translate-x-1/2 -translate-y-1/2 border border-white/20">
+                      <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">40%</div>
+                      <div className="text-gray-600 text-xs font-medium">コスト削減</div>
                     </div>
                     
-                    <div className="absolute bottom-1/3 right-1/4 bg-white rounded-lg shadow-lg p-4 transform translate-x-1/2 translate-y-1/2">
-                      <div className="text-2xl font-bold text-blue-600">2倍</div>
-                      <div className="text-gray-600 text-xs">採用効率</div>
+                    <div className="absolute bottom-1/3 right-1/4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 transform translate-x-1/2 translate-y-1/2 border border-white/20">
+                      <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">2倍</div>
+                      <div className="text-gray-600 text-xs font-medium">採用効率</div>
                     </div>
                   </div>
                 </div>
@@ -383,16 +385,16 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
-      {/* 導入事例セクション */}
+      {/* 導入事例セクション - カードデザインを改善 */}
       <section 
         id="cases"
         ref={setRef('cases')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${isIntersecting['cases'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <p className="text-blue-600 font-medium mb-2">Success Stories</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Success Stories</p>
               <h2 className="text-3xl font-bold mb-4">導入事例</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 データ分析を活用した採用改革により、多くの企業様が採用課題を解決しています。
@@ -403,7 +405,7 @@ export default function AnalyticsPage() {
               {cases.map((case_, index) => (
                 <div 
                   key={index}
-                  className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform ${isIntersecting['cases'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform border border-gray-100 ${isIntersecting['cases'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
                   <div className="relative h-60">
@@ -414,7 +416,7 @@ export default function AnalyticsPage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4">
                       <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
                         {case_.industry}
@@ -423,7 +425,7 @@ export default function AnalyticsPage() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{case_.company}</h3>
-                    <div className="text-xl font-bold text-blue-600 mb-4">{case_.result}</div>
+                    <div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-4">{case_.result}</div>
                     <p className="text-gray-600 mb-4">{case_.description}</p>
                     <Link
                       href={`/cases/${index + 1}`}
@@ -450,15 +452,17 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
-      {/* CTA セクション */}
+      {/* CTA セクション - より魅力的なデザイン */}
       <section 
         id="cta"
         ref={setRef('cta')}
-        className="py-24 bg-gradient-to-r from-blue-900 to-indigo-900 text-white relative overflow-hidden"
+        className="py-28 bg-gradient-to-r from-blue-900 to-indigo-900 text-white relative overflow-hidden"
       >
-        {/* 背景装飾 */}
+        {/* 背景装飾 - より豊かな背景 */}
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-500/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-purple-500/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-teal-500/10 rounded-full blur-xl"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${isIntersecting['cta'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
@@ -475,14 +479,14 @@ export default function AnalyticsPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-md hover:bg-gray-100 transition-colors group shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 hover:-translate-y-1 transition-all group shadow-lg"
               >
                 無料相談を予約する
                 <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/cases"
-                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-md hover:bg-white/10 transition-colors"
+                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-lg hover:bg-white/10 hover:-translate-y-1 transition-all"
               >
                 導入事例を見る
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -492,16 +496,16 @@ export default function AnalyticsPage() {
         </div>
       </section>
 
-      {/* 関連サービスセクション */}
+      {/* 関連サービスセクション - カードデザインを改善 */}
       <section 
         id="related"
         ref={setRef('related')}
-        className="py-24 bg-gray-50"
+        className="py-28 bg-gray-50"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${isIntersecting['related'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <p className="text-blue-600 font-medium mb-2">More Solutions</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">More Solutions</p>
               <h2 className="text-3xl font-bold mb-4">関連サービス</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 貴社の採用課題に合わせて、様々なサービスをご用意しています。
@@ -532,10 +536,10 @@ export default function AnalyticsPage() {
                 <Link
                   key={index}
                   href={service.link}
-                  className={`block bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform ${isIntersecting['related'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  className={`block bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform border border-gray-100 ${isIntersecting['related'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center mb-6">
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>

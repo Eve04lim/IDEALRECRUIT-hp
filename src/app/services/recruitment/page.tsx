@@ -86,12 +86,11 @@ export default function RecruitmentPage() {
     "運用負荷の軽減と採用業務の効率化"
   ];
 
-  // ref設定用のヘルパー関数
+  // ref設定用のヘルパー関数を修正
   const setRef = (id: string) => (el: HTMLElement | null) => {
     if (el) {
       sectionRefs.current[id] = el;
     }
-    return null;
   };
 
   return (
@@ -109,16 +108,20 @@ export default function RecruitmentPage() {
         </div>
       </div>
 
-      {/* ヒーローセクション */}
+      {/* ヒーローセクション - よりモダンなデザインに */}
       <section 
         id="hero-section"
         ref={setRef('hero')}
-        className="relative py-32 bg-gradient-to-br from-blue-800 to-indigo-900 text-white overflow-hidden"
+        className="relative py-36 bg-gradient-to-br from-blue-800 to-indigo-900 text-white overflow-hidden"
       >
-        {/* 背景装飾 */}
+        {/* 背景装飾 - より豊かな背景表現 */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNi02aDZ2LTZoLTZ2NnoiLz48L2c+PC9nPjwvc3ZnPg==')] bg-center opacity-20"></div>
+            <div className="absolute top-0 right-0 w-2/3 h-2/3 bg-white/5 rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-white/5 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+            <div className="absolute top-1/3 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-xl"></div>
+            <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-indigo-400/10 rounded-full blur-xl"></div>
           </div>
         </div>
         
@@ -128,7 +131,7 @@ export default function RecruitmentPage() {
               isIntersecting['hero-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
               <Building className="w-5 h-5 mr-2" />
-              <span>Intermediate Recruitment</span>
+              <span className="tracking-wide">Intermediate Recruitment</span>
             </div>
             
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 transform transition-all duration-1000 delay-100 ${
@@ -136,7 +139,7 @@ export default function RecruitmentPage() {
             }`}>
               最適な媒体選定で
               <br />
-              採用の成功を実現
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-indigo-100">採用の成功を実現</span>
             </h1>
             
             <p className={`text-xl text-blue-100 mb-12 transform transition-all duration-1000 delay-200 ${
@@ -152,14 +155,14 @@ export default function RecruitmentPage() {
             }`}>
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-md hover:bg-blue-50 transition-colors group shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
               >
                 無料相談を予約する
                 <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
               <a
                 href="#features-section"
-                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-md hover:bg-white/10 transition-colors"
+                className="inline-flex items-center px-8 py-4 border border-white text-white rounded-lg hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
               >
                 詳細を見る
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -169,20 +172,20 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      {/* イントロダクションセクション */}
+      {/* イントロダクションセクション - より洗練されたデザイン */}
       <section 
         id="intro-section"
         ref={setRef('intro')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* 左側: イメージ */}
+              {/* 左側: イメージ - 視覚効果を強化 */}
               <div className={`relative transform transition-all duration-1000 ${
                 isIntersecting['intro-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5">
                   <Image
                     src="/api/placeholder/600/450"
                     alt="中途採用支援"
@@ -190,30 +193,33 @@ export default function RecruitmentPage() {
                     height={450}
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
                 </div>
                 
-                {/* 装飾 */}
-                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-blue-100 rounded-full"></div>
-                <div className="absolute -top-8 -right-8 w-32 h-32 bg-indigo-100 rounded-full"></div>
+                {/* 装飾 - より洗練された表現 */}
+                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full"></div>
+                <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full"></div>
               </div>
               
-              {/* 右側: コンテンツ */}
+              {/* 右側: コンテンツ - より読みやすくモダンに */}
               <div className={`prose prose-lg max-w-none text-gray-600 transform transition-all duration-1000 delay-300 ${
                 isIntersecting['intro-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
                 <div className="mb-6">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">最適な媒体選定で採用効果を最大化</h2>
-                  <p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4 relative inline-block">
+                    最適な媒体選定で採用効果を最大化
+                    <div className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
+                  </h2>
+                  <p className="leading-relaxed">
                     弊社では、数多くの中途採用媒体を取り扱っており、採用戦略に応じた適切な媒体をご提案いたします。
                     具体的には、採用予算、採用ターゲット、その時々での各媒体のキャンペーン状況を踏まえ、最適な媒体選びから、求人運用までを並走いたします。
                   </p>
-                  <p>
+                  <p className="leading-relaxed">
                     各媒体の運用方法や求人広告内容については、これまでの採用支援のノウハウを結集して、採用のプロがサポートします。
                   </p>
                 </div>
                 
-                <blockquote className="bg-blue-50 px-6 py-4 rounded-lg">
+                <blockquote className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 rounded-lg border-l-4 border-blue-400 not-italic">
                   <p className="text-blue-700 font-medium">
                     「どの求人媒体を使えばいいのかわからない」「予算を効果的に使いたい」というお悩みをお持ちの企業様に、最適な採用支援をご提供します。
                   </p>
@@ -224,18 +230,18 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      {/* 特徴セクション */}
+      {/* 特徴セクション - カードデザインを改善 */}
       <section 
         id="features-section"
         ref={setRef('features')}
-        className="py-24 bg-gray-50"
+        className="py-28 bg-gray-50"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${
               isIntersecting['features-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
-              <p className="text-blue-600 font-medium mb-2">Our Features</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Features</p>
               <h2 className="text-3xl font-bold mb-4">サービスの特徴</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 中途採用支援サービスでは、媒体選定から運用改善まで幅広くサポートします。
@@ -246,12 +252,12 @@ export default function RecruitmentPage() {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`bg-white shadow-lg rounded-xl p-6 transform transition-all duration-700 hover:shadow-xl hover:-translate-y-1 ${
+                  className={`bg-white shadow-lg rounded-xl p-8 transform transition-all duration-700 hover:shadow-xl hover:-translate-y-1 border border-gray-100 ${
                     isIntersecting['features-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  <div className="mb-4 w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center">
+                  <div className="mb-4 w-14 h-14 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shadow-sm">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
@@ -263,22 +269,23 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      {/* 媒体一覧セクション */}
+      {/* 媒体一覧セクション - グリッドデザインを改善 */}
       <section 
         id="media-section"
         ref={setRef('media')}
-        className="py-24 bg-white relative overflow-hidden"
+        className="py-28 bg-white relative overflow-hidden"
       >
-        {/* 装飾 */}
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full opacity-80 blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-50 rounded-full opacity-80 blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        {/* 装飾 - より豊かな背景 */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-50 rounded-full opacity-80 blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-50 rounded-full opacity-80 blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-teal-50 rounded-full opacity-80 blur-xl"></div>
         
         <div className="container relative z-10 mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className={`text-center mb-16 transform transition-all duration-1000 ${
               isIntersecting['media-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
-              <p className="text-blue-600 font-medium mb-2">Our Media</p>
+              <p className="text-blue-600 font-medium mb-2 tracking-wide">Our Media</p>
               <h2 className="text-3xl font-bold mb-4">取扱い媒体一覧</h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
                 貴社のニーズに合わせて、最適な求人媒体をご提案します。
@@ -289,13 +296,13 @@ export default function RecruitmentPage() {
               {media.map((item, index) => (
                 <div 
                   key={index}
-                  className={`bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform ${
+                  className={`bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 ${
                     isIntersecting['media-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="font-bold text-lg text-gray-900 mb-2">{item.name}</div>
-                  <div className="text-sm text-blue-600">{item.category}</div>
+                  <div className="text-sm text-blue-600 bg-blue-50 px-2 py-1 rounded-full inline-block">{item.category}</div>
                 </div>
               ))}
             </div>
@@ -303,20 +310,20 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      {/* メリットセクション */}
+      {/* メリットセクション - 視覚的にインパクトを強化 */}
       <section 
         id="benefits-section"
         ref={setRef('benefits')}
-        className="py-24 bg-blue-900 text-white"
+        className="py-28 bg-gradient-to-br from-blue-900 to-indigo-900 text-white"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* 左側: コンテンツ */}
+              {/* 左側: コンテンツ - より読みやすくモダンに */}
               <div className={`transform transition-all duration-1000 ${
                 isIntersecting['benefits-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <p className="text-blue-300 font-medium mb-2">Our Benefits</p>
+                <p className="text-blue-300 font-medium mb-2 tracking-wide">Our Benefits</p>
                 <h2 className="text-3xl font-bold mb-8">導入メリット</h2>
                 
                 <div className="space-y-6">
@@ -326,7 +333,7 @@ export default function RecruitmentPage() {
                       className="flex items-start"
                       style={{ transitionDelay: `${index * 200}ms` }}
                     >
-                      <div className="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-blue-700/50 backdrop-blur-sm flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
                         <Check className="w-5 h-5 text-white" />
                       </div>
                       <p className="ml-4 text-blue-100 text-lg">{benefit}</p>
@@ -335,11 +342,11 @@ export default function RecruitmentPage() {
                 </div>
               </div>
               
-              {/* 右側: 画像 */}
+              {/* 右側: 画像 - 視覚効果を強化 */}
               <div className={`transform transition-all duration-1000 delay-500 ${
                 isIntersecting['benefits-section'] ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
               }`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                   <Image
                     src="/api/placeholder/600/400"
                     alt="導入メリット"
@@ -347,11 +354,11 @@ export default function RecruitmentPage() {
                     height={400}
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
                   
-                  {/* オーバーレイコンテンツ */}
+                  {/* オーバーレイコンテンツ - より洗練されたデザイン */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl text-center">
+                    <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl text-center shadow-lg border border-white/10">
                       <h3 className="text-2xl font-bold mb-2">採用効率の向上</h3>
                       <p className="text-blue-100">最適な媒体選定で効果を最大化</p>
                     </div>
@@ -363,11 +370,11 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      {/* CTA セクション */}
+      {/* CTA セクション - より魅力的なデザイン */}
       <section 
         id="cta-section"
         ref={setRef('cta')}
-        className="py-24 bg-white"
+        className="py-28 bg-white"
       >
         <div className="container mx-auto px-4">
           <div className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
@@ -376,7 +383,7 @@ export default function RecruitmentPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               貴社に最適な中途採用戦略を
               <br />
-              一緒に考えましょう
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">一緒に考えましょう</span>
             </h2>
             <p className="text-xl text-gray-600 mb-12">
               採用予算、採用ターゲット、スケジュールに合わせて、
@@ -385,7 +392,7 @@ export default function RecruitmentPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors group shadow-lg"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:bg-gradient-to-r hover:from-blue-700 hover:to-blue-600 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
             >
               ご相談はこちら
               <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
