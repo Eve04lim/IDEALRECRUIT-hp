@@ -34,7 +34,7 @@ export function ServiceSection() {
       backgroundText1: "DATA",
       backgroundText2: "ANALYTICS",
       videoSrc: "/videos/analytics.mp4", // 実際のビデオパスに置き換えてください
-      imageUrl: "/api/placeholder/640/360" // 開発用プレースホルダー
+      imageUrl: "/images/analytics.jpg" // 開発用プレースホルダー
     },
     {
       icon: <Users className="w-8 h-8 text-blue-600" />,
@@ -45,7 +45,7 @@ export function ServiceSection() {
       backgroundText1: "RECRUIT",
       backgroundText2: "PROCESS",
       videoSrc: "/videos/rpo.mp4", // 実際のビデオパスに置き換えてください
-      imageUrl: "/api/placeholder/640/360" // 開発用プレースホルダー
+      imageUrl: "/images/rpo.jpg" // 開発用プレースホルダー
     },
     {
       icon: <Target className="w-8 h-8 text-blue-600" />,
@@ -56,7 +56,7 @@ export function ServiceSection() {
       backgroundText1: "SUCCESS",
       backgroundText2: "BASED",
       videoSrc: "/videos/performance.mp4", // 実際のビデオパスに置き換えてください
-      imageUrl: "/api/placeholder/640/360" // 開発用プレースホルダー
+      imageUrl: "/images/performance.jpg" // 開発用プレースホルダー
     },
     {
       icon: <Building className="w-8 h-8 text-blue-600" />,
@@ -67,7 +67,7 @@ export function ServiceSection() {
       backgroundText1: "MID",
       backgroundText2: "CAREER",
       videoSrc: "/videos/recruitment.mp4", // 実際のビデオパスに置き換えてください
-      imageUrl: "/api/placeholder/640/360" // 開発用プレースホルダー
+      imageUrl: "/images/recruitment.jpg" // 開発用プレースホルダー
     }
   ];
 
