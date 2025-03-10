@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { ArrowRight, Building, Calendar, ChevronRight, MapPin, Star, User } from 'lucide-react';
 import Image from 'next/image';
-import { ArrowRight, Star, Building, Calendar, MapPin, User, Check, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 // 型定義
 interface SectionRefs {
@@ -231,7 +231,7 @@ export default function AboutPage() {
                   </p>
                   <blockquote className="bg-blue-50 p-6 rounded-xl mb-6">
                     <p className="text-blue-900 font-medium text-xl italic">
-                      "全ては「正当に頑張ってる人が評価される社会を創る為に」"
+                      全ては「正当に頑張ってる人が評価される社会を創る為に」
                     </p>
                   </blockquote>
                   <p>
@@ -413,12 +413,14 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* 左側: 地図 */}
               <div className={`bg-gray-100 rounded-xl overflow-hidden h-96 transform transition-all duration-1000 ${
-                isIntersecting['access-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}>
-                {/* 実際の地図を埋め込む場合はここを変更 */}
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <p className="text-gray-500">Google Mapの埋め込み</p>
-                </div>
+                isIntersecting['access-section'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3219.7292508517177!2d135.57644937577214!3d34.67430128036739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e4de5c34e855%3A0xe1d4d34e52eb8a!2z5pel5pys55yM5p2x5aSn5ZyS5biC5LiK5bCP6Zmi77yTMS0xMy055Y-3!5e0!3m2!1sja!2sjp!4v1705559183210!5m2!1sja!2sjp"
+                  className="w-full h-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade">
+                </iframe>
               </div>
               
               {/* 右側: 情報 */}
