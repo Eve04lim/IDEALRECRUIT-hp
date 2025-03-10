@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { AlertCircle, CheckCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export function ContactSection() {
@@ -15,6 +15,12 @@ export function ContactSection() {
   
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
+  
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,14 +50,55 @@ export function ContactSection() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // ここでフォームの送信処理を実装
-    console.log('Form submitted:', formData);
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitResult(null);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        setSubmitResult({
+          success: true,
+          message: 'お問い合わせを受け付けました。担当者より連絡いたします。'
+        });
+        // フォームをリセット
+        setFormData({
+          company: '',
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          type: 'general'
+        });
+      } else {
+        setSubmitResult({
+          success: false,
+          message: result.error || 'お問い合わせの送信に失敗しました。'
+        });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error); // エラーをログに記録
+      setSubmitResult({
+        success: false,
+        message: 'サーバーとの通信中にエラーが発生しました。'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -184,6 +231,22 @@ export function ContactSection() {
                   お問い合わせフォーム
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* 送信結果メッセージ */}
+                  {submitResult && (
+                    <div className={`p-4 rounded-lg ${submitResult.success ? 'bg-green-50 border border-green-100' : 'bg-red-50 border border-red-100'}`}>
+                      <div className="flex items-start">
+                        {submitResult.success ? (
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                        ) : (
+                          <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+                        )}
+                        <p className={submitResult.success ? 'text-green-700' : 'text-red-700'}>
+                          {submitResult.message}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
                   <div className="space-y-4">
                     <label className="block">
                       <span className="text-gray-700 font-medium">お問い合わせ種別<span className="text-red-500">*</span></span>
@@ -266,10 +329,23 @@ export function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-5 h-5 mr-2" />
-                    送信する
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        送信中...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        送信する
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
